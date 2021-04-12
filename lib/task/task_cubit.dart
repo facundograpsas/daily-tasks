@@ -1,9 +1,8 @@
 import 'dart:developer';
 
-import 'package:daily_tajsks/task_state.dart';
-
-import 'package:daily_tajsks/db.dart';
-import 'package:daily_tajsks/task.dart';
+import 'package:daily_tajsks/task/db.dart';
+import 'package:daily_tajsks/task/task.dart';
+import 'package:daily_tajsks/task/task_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class TaskCubit extends Cubit<TaskState>{
@@ -26,9 +25,9 @@ class TaskCubit extends Cubit<TaskState>{
     final tasksMap = await TasksDatabase.instance.queryAllRows();
     _tasksList = tasksMap.map((task) =>
        Task(text: task["text"],
-            id: task["id"],
-       taskIndex: task["taskIndex"])
-    ).toList();
+            id: task["id"]
+    )).toList();
+
     emit(TasksLoaded(_tasksList));
   }
 

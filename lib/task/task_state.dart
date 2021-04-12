@@ -1,4 +1,4 @@
-import 'package:daily_tajsks/task.dart';
+import 'package:daily_tajsks/task/task.dart';
 import 'package:equatable/equatable.dart';
 
 abstract class TaskState extends Equatable{

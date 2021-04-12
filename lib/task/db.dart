@@ -1,4 +1,5 @@
-import 'package:daily_tajsks/task.dart';
+
+import 'package:daily_tajsks/task/task.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
@@ -32,7 +33,6 @@ class TasksDatabase{
     await db.execute('''
           CREATE TABLE "task" (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            taskIndex STRING NOT NULL,
             text STRING NOT NULL
           )
           ''');
@@ -65,10 +65,5 @@ class TasksDatabase{
     var taskMap =  await db.rawQuery('SELECT * FROM $table WHERE id=?', [id]);
     return taskMap.first;
   }
-  //
-  // Future<void> updateIds(int oldIndex, int newIndex) async {
-  //   Database db = await instance.database;
-  //   var index = newIndex;
-  //   }
 
 }
