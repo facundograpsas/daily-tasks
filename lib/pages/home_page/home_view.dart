@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:daily_tajsks/pages/home_page/widgets/custom_textfield.dart';
 import 'package:daily_tajsks/pages/home_page/widgets/tasks_box.dart';
 import 'package:daily_tajsks/task/task.dart';
 import 'package:daily_tajsks/task/task_cubit.dart';
@@ -31,18 +32,20 @@ class _HomeViewState extends State<HomeView> {
           TasksBox(),
           Row(children: [
             Expanded(
-              child: TextField(
-                controller: myController,
-              ),
+              child: CircularRadiusShadowTextField(myController: myController),
             ),
             ElevatedButton(
               child: Icon(Icons.send),
-              onPressed: () => context
-                  .read<TaskCubit>()
-                  .addTask(Task(text: myController.text)),
+              onPressed: () {
+                context
+                    .read<TaskCubit>()
+                    .addTask(Task(text: myController.text));
+                myController.clear();
+              }
             )
           ])
         ])) // This trailing comma makes auto-formatting nicer for build methods.
         );
   }
 }
+
