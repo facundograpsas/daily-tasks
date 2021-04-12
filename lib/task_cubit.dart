@@ -1,0 +1,59 @@
+import 'dart:developer';
+
+import 'package:daily_tajsks/task_state.dart';
+
+import 'package:daily_tajsks/db.dart';
+import 'package:daily_tajsks/task.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+class TaskCubit extends Cubit<TaskState>{
+
+  List<Task>_tasksList;
+
+  TaskCubit() : super(TaskInitial()){
+    loadTasks();
+  }
+
+  @override
+  void onChange(Change<TaskState> change) {
+    log(change.toString());
+    super.onChange(change);
+  }
+
+
+  void loadTasks() async {
+    await Future.delayed(Duration(seconds: 2));
+    final tasksMap = await TasksDatabase.instance.queryAllRows();
+    _tasksList = tasksMap.map((task) =>
+       Task(text: task["text"],
+            id: task["id"],
+       taskIndex: task["taskIndex"])
+    ).toList();
+    emit(TasksLoaded(_tasksList));
+  }
+
+
+
+  void addTask(Task task) async {
+    emit(TaskUpdate(_tasksList));
+    var id = await TasksDatabase.instance.insert(task);
+    var taskMap = await TasksDatabase.instance.get(id);
+    _tasksList.insert(0, Task(text: taskMap["text"], id: taskMap["id"]));
+    emit(TasksLoaded(_tasksList));
+  }
+
+
+
+  void updateList(int oldIndex, int newIndex) async {
+    emit(TaskUpdate(_tasksList));
+    await TasksDatabase.instance.updateIds(oldIndex, newIndex);
+    var task = _tasksList.elementAt(oldIndex);
+    _tasksList.removeAt(oldIndex);
+    if(newIndex<oldIndex){
+      _tasksList.insert(newIndex, task);
+    }else{
+      _tasksList.insert(newIndex-1, task);
+    }
+    emit(TasksLoaded(_tasksList));
+  }
+}
