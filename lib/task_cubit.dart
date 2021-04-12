@@ -46,14 +46,12 @@ class TaskCubit extends Cubit<TaskState>{
 
   void updateList(int oldIndex, int newIndex) async {
     emit(TaskUpdate(_tasksList));
-    await TasksDatabase.instance.updateIds(oldIndex, newIndex);
     var task = _tasksList.elementAt(oldIndex);
     _tasksList.removeAt(oldIndex);
-    if(newIndex<oldIndex){
-      _tasksList.insert(newIndex, task);
-    }else{
-      _tasksList.insert(newIndex-1, task);
-    }
+
+    if (newIndex<oldIndex)  {_tasksList.insert(newIndex, task);}
+    else { _tasksList.insert(newIndex-1, task); }
+
     emit(TasksLoaded(_tasksList));
   }
 }

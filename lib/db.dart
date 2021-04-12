@@ -63,24 +63,12 @@ class TasksDatabase{
   Future<Map<String, dynamic>> get(int id) async {
     Database db = await instance.database;
     var taskMap =  await db.rawQuery('SELECT * FROM $table WHERE id=?', [id]);
-    taskMap.forEach((element) {
-      print(element);
-    });
     return taskMap.first;
   }
-
-  Future<void> updateIds(int oldIndex, int newIndex) async {
-    Database db = await instance.database;
-    var index = newIndex;
-    // for(var i = index ; i >= oldIndex; i--){
-    //   print("BROO");
-    //   await db.update(
-    //     table,
-    //     {"id": i},
-    //     where: "id = ?",
-    //     whereArgs: [i],
-    //   );
-    // }
-    }
+  //
+  // Future<void> updateIds(int oldIndex, int newIndex) async {
+  //   Database db = await instance.database;
+  //   var index = newIndex;
+  //   }
 
 }
