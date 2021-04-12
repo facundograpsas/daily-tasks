@@ -36,7 +36,7 @@ class _HomeViewState extends State<HomeView> {
               ),
             ),
             ElevatedButton(
-              child: Text('Enviar'),
+              child: Icon(Icons.send),
               onPressed: () => context
                   .read<TaskCubit>()
                   .addTask(Task(text: myController.text)),

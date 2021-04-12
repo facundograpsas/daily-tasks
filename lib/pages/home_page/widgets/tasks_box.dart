@@ -31,12 +31,17 @@ class _TasksBoxState extends State<TasksBox> {
                   key: ValueKey(state.tasks[index]),
                   children: [
                     ListTile(
-                      title: (Text(state.tasks[index].text)),
-                      subtitle: Text(index.toString() +
-                          " ID:" +
-                          state.tasks[index].id.toString()),
+                      title: (Text(state.tasks[index].text,
+                      style: TextStyle(decoration: TextDecoration.lineThrough, decorationColor: Colors.grey),)),
+
+                      onTap: (){},
+                      trailing: Icon(Icons.delete),
                     ),
-                    Divider()
+                    Divider(
+                      thickness: 0.5,
+                      indent: 20,
+                      endIndent: 20,
+                    )
                   ],
                 );
               },
