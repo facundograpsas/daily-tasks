@@ -11,9 +11,9 @@ class TasksDatabase{
   static final table = "task";
   static final id = "id";
 
-  static Database _database;
+  static Database? _database;
 
-  Future<Database> get database async {
+  Future<Database?> get database async {
     if(_database!=null){
       return _database;
     }
@@ -39,29 +39,31 @@ class TasksDatabase{
   }
 
   Future<int> insert(Task task) async {
-    Database db = await instance.database;
+    Database db = (await instance.database)!;
     var res = await db.insert(table, task.toMap());
     return res;
   }
 
   Future<List<Map<String, dynamic>>> queryAllRows() async {
-    Database db = await instance.database;
+    Database db = (await instance.database)!;
     var res = await db.query(table, orderBy: "$id DESC");
     return res;
   }
 
-  Future<int> delete(int id) async {
-    Database db = await instance.database;
-    return await db.delete(table, where: '$id = ?', whereArgs: [id]);
+  Future<void> delete(int id) async {
+    Database db = (await instance.database)!;
+    // return await db.delete(table, where: '$id = ?', whereArgs: [id]);
+    await db.rawQuery('DELETE FROM $table WHERE id=?', [id]);
+
   }
 
   Future<void> clearTable() async {
-    Database db = await instance.database;
-    return await db.rawQuery("DELETE FROM $table");
+    Database db = (await instance.database)!;
+    await db.rawQuery("DELETE FROM $table");
   }
 
   Future<Map<String, dynamic>> get(int id) async {
-    Database db = await instance.database;
+    Database db = (await instance.database)!;
     var taskMap =  await db.rawQuery('SELECT * FROM $table WHERE id=?', [id]);
     return taskMap.first;
   }

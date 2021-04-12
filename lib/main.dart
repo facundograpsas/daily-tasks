@@ -1,7 +1,5 @@
-import 'dart:developer';
 
 import 'package:daily_tajsks/pages/home_page/home_page.dart';
-import 'package:daily_tajsks/pages/home_page/home_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +13,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+         primaryColor: Color(0xff842121)
       ),
       home: HomePage(),
     );

@@ -23,3 +23,7 @@ class TaskUpdate extends TaskState{
   TaskUpdate(this.tasks);
   // List<Object> get props => [tasks];
 }
+
+class TaskCleared extends TaskState{
+
+}

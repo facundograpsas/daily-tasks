@@ -3,16 +3,16 @@ import 'package:flutter/cupertino.dart';
 
 class CircularRadiusShadowTextField extends StatelessWidget {
   const CircularRadiusShadowTextField({
-    Key key,
-    @required this.myController,
-  }) : super(key: key);
+    
+    required this.myController,
+  }) : super();
 
   final TextEditingController myController;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(3.0),
       child: DecoratedBox(
         decoration: BoxDecoration(
             color: Colors.white70,
@@ -28,8 +28,11 @@ class CircularRadiusShadowTextField extends StatelessWidget {
             ]
         ),
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 10),
           child: TextField(
+            keyboardType: TextInputType.multiline,
+            maxLines: 10,
+            minLines: 1,
             decoration: InputDecoration(
               border: InputBorder.none,
               hintText: "Write your task here...",

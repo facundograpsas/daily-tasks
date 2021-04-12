@@ -1,9 +1,9 @@
 class Task{
 
   final String text;
-  final int id;
+  final int? id;
 
-  Task({this.id, this.text});
+  Task({this.id, required this.text});
 
   Map<String, dynamic> toMap(){
       return {
