@@ -1,2 +1,2 @@
-# daily_tajsks
- daily task manager made in flutter
+# daily_tasks
+ Daily task manager made in flutter using Cubits and local Sqlite database.
