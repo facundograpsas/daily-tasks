@@ -1,3 +1,7 @@
+import 'dart:developer';
+
+import 'package:daily_tajsks/pages/home_page/widgets/done_tile.dart';
+import 'package:daily_tajsks/pages/home_page/widgets/not_done_tile.dart';
 import 'package:daily_tajsks/task/task.dart';
 import 'package:daily_tajsks/task/task_cubit.dart';
 import 'package:daily_tajsks/task/task_state.dart';
@@ -27,26 +31,11 @@ class _TasksBoxState extends State<TasksBox> {
       child: ListView(
           children: [
             for (final task in state.tasks)
-              Dismissible(
-                child: ListTile(
-                  key: ValueKey(task),
-                  title: (Text(
-                    task.text,
-                    style: TextStyle(
-                        decoration: TextDecoration.lineThrough,
-                        decorationColor: Colors.grey),
-                  )),
-                  onTap: () {},
-                  trailing: Icon(Icons.hourglass_top_rounded),
-                ),
-                key: ValueKey(task),
-                background: Container(
-                  color: Color(0xff842121),
-                ),
-                onDismissed: (DismissDirection direction) {
-                  context.read<TaskCubit>().deleteTask(task);
-                },
-              ),
+              if(task.done == 0)
+                 NotDoneTile(task: task)
+              else
+                 DoneTile(task: task)
+      ,
             Divider(
               key: ValueKey("task"),
               thickness: 0.5,
@@ -58,4 +47,6 @@ class _TasksBoxState extends State<TasksBox> {
       }
     });
   }
+
+
 }

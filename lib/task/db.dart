@@ -33,7 +33,8 @@ class TasksDatabase{
     await db.execute('''
           CREATE TABLE "task" (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            text STRING NOT NULL
+            text STRING NOT NULL,
+            done BOOLEAN NOT NULL
           )
           ''');
   }
@@ -66,6 +67,18 @@ class TasksDatabase{
     Database db = (await instance.database)!;
     var taskMap =  await db.rawQuery('SELECT * FROM $table WHERE id=?', [id]);
     return taskMap.first;
+  }
+
+  Future<void> updateTask(Task task) async {
+    // Get a reference to the database.
+    Database db = (await instance.database)!;
+    // Update the given Dog.
+    await db.update(
+      'task',
+      task.toMap(),
+      where: "id = ?",
+      whereArgs: [task.id],
+    );
   }
 
 }
