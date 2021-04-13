@@ -24,7 +24,7 @@ class TaskCubit extends Cubit<TaskState>{
     await Future.delayed(Duration(seconds: 2));
     final tasksMap = await TasksDatabase.instance.queryAllRows();
     _tasksList = tasksMap.map((task) =>
-       Task(text: task["text"],
+       Task(text: task["text"].toString(),
             id: task["id"]
     )).toList();
 
@@ -37,7 +37,7 @@ class TaskCubit extends Cubit<TaskState>{
     emit(TaskUpdate(_tasksList!));
     var id = await TasksDatabase.instance.insert(task);
     var taskMap = await TasksDatabase.instance.get(id);
-    _tasksList!.insert(0, Task(text: taskMap["text"], id: taskMap["id"]));
+    _tasksList!.insert(0, Task(text: taskMap["text"].toString(), id: taskMap["id"]));
     emit(TasksLoaded(_tasksList!));
   }
 
