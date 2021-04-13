@@ -33,29 +33,33 @@ class _HomeViewState extends State<HomeView> {
           ],
           title: Text(widget.title),
         ),
-        body: Center(
-            child: Column(children: [
-          TasksBox(),
-          Row(children: [
-            Expanded(
-              child: CircularRadiusShadowTextField(myController: myController),
-            ),
-            IconButton(
-              icon: Icon(Icons.send),
-              color: Colors.redAccent,
-              iconSize: 40,
-              onPressed: () {
-                if(myController.text.isNotEmpty){
-                  context
-                      .read<TaskCubit>()
-                      .addTask(Task(text: myController.text));
-                  myController.clear();
+        body: Column(
+          children: [
+            Flexible(
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                TasksBox()])),
+                Row(children: [
+              Expanded(
+                child: CircularRadiusShadowTextField(myController: myController),
+              ),
+              IconButton(
+                icon: Icon(Icons.send),
+                color: Colors.redAccent,
+                iconSize: 40,
+                onPressed: () {
+                  if(myController.text.isNotEmpty){
+                    context
+                        .read<TaskCubit>()
+                        .addTask(Task(text: myController.text));
+                    myController.clear();
+                  }
                 }
-              }
-            )
-          ])
-        ])) // This trailing comma makes auto-formatting nicer for build methods.
-        );
+              )
+                ])
+              ]),
+            );
   }
 }
 
