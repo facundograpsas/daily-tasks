@@ -53,7 +53,6 @@ class TasksDatabase{
 
   Future<void> delete(int id) async {
     Database db = (await instance.database)!;
-    // return await db.delete(table, where: '$id = ?', whereArgs: [id]);
     await db.rawQuery('DELETE FROM $table WHERE id=?', [id]);
 
   }
@@ -70,9 +69,7 @@ class TasksDatabase{
   }
 
   Future<void> updateTask(Task task) async {
-    // Get a reference to the database.
     Database db = (await instance.database)!;
-    // Update the given Dog.
     await db.update(
       'task',
       task.toMap(),
