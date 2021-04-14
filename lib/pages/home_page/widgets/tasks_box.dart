@@ -29,19 +29,12 @@ class _TasksBoxState extends State<TasksBox> {
       } else {
     return Flexible(
       child: ListView(
-          children: [
-            for (final task in state.tasks)
+          children: <Widget>[
+            for(final task in state.tasks)
               if(task.done == 0)
-                 NotDoneTile(task: task)
+                NotDoneTile(task: task)
               else
-                 DoneTile(task: task)
-      ,
-            Divider(
-              key: ValueKey("task"),
-              thickness: 0.5,
-              indent: 20,
-              endIndent: 20,
-            )
+                DoneTile(task: task)
           ]),
     );
       }

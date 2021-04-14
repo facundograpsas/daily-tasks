@@ -19,19 +19,24 @@ class _DoneTileState extends State<DoneTile> {
   @override
   Widget build(BuildContext context) {
     return Dismissible(
-      child: ListTile(
-        onLongPress: () => context.read<TaskCubit>().taskDone(widget.task),
-        key: ValueKey(widget.task),
-        tileColor: Colors.green,
-        title: (Text(
-          widget.task.text,
-          style: TextStyle(
-              decoration: TextDecoration.lineThrough,
-              decorationColor: Colors.grey),
-        )),
-        subtitle: Text(widget.task.done.toString()),
-        onTap: () {},
-        trailing: Icon(Icons.hourglass_top_rounded),
+      child: Container(
+        decoration: BoxDecoration(border: Border(bottom: BorderSide(color: Colors.black12)),
+        color: Color(0xffb66868)),
+        child: ListTile(
+          tileColor: Color(0xffb66868),
+          onLongPress: () => context.read<TaskCubit>().taskDone(widget.task),
+          key: ValueKey(widget.task),
+          title: (Text(
+            widget.task.text,
+            style: TextStyle(
+                decoration: TextDecoration.lineThrough,
+                decorationColor: Colors.grey),
+          )),
+          subtitle: Text("Done!"),
+          onTap: () {},
+          trailing: Icon(Icons.done,
+          color: Colors.redAccent,),
+        ),
       ),
       key: ValueKey(widget.task),
       background: Container(
