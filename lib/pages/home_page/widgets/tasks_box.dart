@@ -8,10 +8,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class TasksBox extends StatefulWidget {
-  final ScrollController _scrollController = ScrollController();
+  final ScrollController scrollController;
 
   @override
-  TasksBox() : super();
+  TasksBox({required this.scrollController}) : super();
 
   _TasksBoxState createState() => _TasksBoxState();
 }
@@ -26,10 +26,10 @@ class _TasksBoxState extends State<TasksBox> {
         valueColor: AlwaysStoppedAnimation<Color>(Colors.redAccent)
     );
       } else {
-        if(state is TaskAdded){ widget._scrollController.jumpTo(widget._scrollController.position.maxScrollExtent);}
+        // if(state is TaskAdded){ widget._scrollController.jumpTo(widget._scrollController.position.maxScrollExtent);}
     return Flexible(
       child: ListView(
-          controller: widget._scrollController,
+          controller: widget.scrollController,
           children: <Widget>[
             for(final task in state.tasks)
               if(task.done == 0)

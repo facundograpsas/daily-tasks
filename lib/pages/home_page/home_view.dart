@@ -42,7 +42,7 @@ class _HomeViewState extends State<HomeView> {
               child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                TasksBox()])),
+                TasksBox(scrollController: _scrollController)])),
                 Row(children: [
               Flexible(
                 child: CircularRadiusShadowTextField(editTextController: myController),
@@ -55,6 +55,8 @@ class _HomeViewState extends State<HomeView> {
                   if(myController.text.isNotEmpty){
                     context.read<TaskCubit>().addTask(Task(text: myController.text));
                     myController.clear();
+                    await Future.delayed(Duration(milliseconds: 200));
+                    _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
                   }
                 }
               )
