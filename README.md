@@ -1,4 +1,4 @@
-# daily_tasks
+# Daily taskjs
  Daily task manager made in flutter using Cubits and local Sqlite database.
 
 ![](sh/addgsm.gif)
