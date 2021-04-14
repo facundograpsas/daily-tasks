@@ -21,14 +21,12 @@ class TaskCubit extends Cubit<TaskState>{
 
 
   void loadTasks() async {
-    await Future.delayed(Duration(seconds: 2));
     final tasksMap = await TasksDatabase.instance.queryAllRows();
     _tasksList = tasksMap.map((task) =>
        Task(text: task["text"].toString(),
             id: task["id"],
             done: task["done"]
     )).toList();
-
     emit(TasksLoaded(_tasksList!));
   }
 
@@ -38,8 +36,9 @@ class TaskCubit extends Cubit<TaskState>{
     emit(TaskUpdate(_tasksList!));
     var id = await TasksDatabase.instance.insert(task);
     var taskMap = await TasksDatabase.instance.get(id);
-    _tasksList!.insert(0, Task(text: taskMap["text"].toString(), id: taskMap["id"], done: taskMap["done"]));
-    emit(TasksLoaded(_tasksList!));
+    _tasksList!.add(Task(text: taskMap["text"].toString(), id: taskMap["id"], done: taskMap["done"]));
+    // _tasksList!.insert(0, Task(text: taskMap["text"].toString(), id: taskMap["id"], done: taskMap["done"]));
+    emit(TaskAdded(_tasksList!));
   }
 
 

@@ -1,4 +1,6 @@
 
+import 'dart:async';
+
 import 'package:daily_tajsks/pages/home_page/widgets/custom_textfield.dart';
 import 'package:daily_tajsks/pages/home_page/widgets/tasks_box.dart';
 import 'package:daily_tajsks/task/task.dart';
@@ -19,6 +21,7 @@ class _HomeViewState extends State<HomeView> {
   int taps = 0;
 
   final myController = TextEditingController();
+  final ScrollController _scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
@@ -41,18 +44,16 @@ class _HomeViewState extends State<HomeView> {
                   children: [
                 TasksBox()])),
                 Row(children: [
-              Expanded(
+              Flexible(
                 child: CircularRadiusShadowTextField(myController: myController),
               ),
               IconButton(
                 icon: Icon(Icons.send),
                 color: Colors.redAccent,
                 iconSize: 40,
-                onPressed: () {
+                onPressed: () async {
                   if(myController.text.isNotEmpty){
-                    context
-                        .read<TaskCubit>()
-                        .addTask(Task(text: myController.text));
+                    context.read<TaskCubit>().addTask(Task(text: myController.text));
                     myController.clear();
                   }
                 }

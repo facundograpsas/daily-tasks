@@ -32,3 +32,9 @@ class TaskDone extends TaskState{
   TaskDone(this.tasks);
 // List<Object> get props => [tasks];
 }
+
+class TaskAdded extends TaskState{
+  final List<Task> tasks;
+  TaskAdded(this.tasks);
+// List<Object> get props => [tasks];
+}
