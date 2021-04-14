@@ -3,10 +3,10 @@ import 'package:flutter/cupertino.dart';
 
 class CircularRadiusShadowTextField extends StatelessWidget {
   const CircularRadiusShadowTextField({
-    required this.myController,
+    required this.editTextController,
   }) : super();
 
-  final TextEditingController myController;
+  final TextEditingController editTextController;
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +36,7 @@ class CircularRadiusShadowTextField extends StatelessWidget {
               border: InputBorder.none,
               hintText: "Write your task here...",
             ),
-            controller: myController,
+            controller: editTextController,
           ),
         ),
       ),

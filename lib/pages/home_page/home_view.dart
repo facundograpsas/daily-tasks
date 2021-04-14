@@ -45,7 +45,7 @@ class _HomeViewState extends State<HomeView> {
                 TasksBox()])),
                 Row(children: [
               Flexible(
-                child: CircularRadiusShadowTextField(myController: myController),
+                child: CircularRadiusShadowTextField(editTextController: myController),
               ),
               IconButton(
                 icon: Icon(Icons.send),
